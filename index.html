@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>5-in-5 Screens</title>
+		<title>Fly By Screens</title>
 		<style>
 			body{
-				padding:0px 0px 0px 0px;
-				margin:0px 0px 0px 0px;
 				background-color: black;
+				margin: 0px 0px 0px 0px;
+				padding: 0px 0px 0px 0px;
 			}
 			canvas{
 				position:absolute;
@@ -102,6 +102,10 @@
 				updateSize();
 				drawLoop();
 			}
+
+			setTimeout(function(){
+				window.location = location.origin;
+			},(60000*5));
 
 			function fullscreen(){
 				if(canvas.requestFullScreen)
