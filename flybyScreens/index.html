@@ -29,10 +29,44 @@
 
 			function setup(){
 				console.log("setup Processing");
+				var canvas = createCanvas(window.innerWidth, window.innerHeight);
+				canvas.mousePressed( makeRandomBall );
 			}
 
+			var allBalls = [];
+
 			function draw(){
-				//
+				background(0);
+				for(var i =0; i<allBalls.length;i++){
+					allBalls[i].x += allBalls[i].xSpeed;
+					allBalls[i].y += allBalls[i].ySpeed;
+					if (allBalls[i].x<0 || allBalls[i].x > 1) {
+						allBalls[i].xSpeed *= -1;
+						allBalls[i].x += allBalls[i].xSpeed;
+					}
+					if (allBalls[i].y<0 || allBalls[i].y > 1) {
+						allBalls[i].ySpeed *= -1;
+						allBalls[i].y += allBalls[i].ySpeed;
+					}
+					fill(allBalls[i].r,allBalls[i].g,allBalls[i].b);
+					ellipse(allBalls[i].x*width, allBalls[i].y*height, 30, 30);
+				}
+			}
+
+
+
+
+			function makeRandomBall() {
+				var newBall = {
+					'x': mouseX,
+					'y': mouseY,
+					'xSpeed': random(0.01, 0.02),
+					'ySpeed': random(0.01, 0.02),
+					'r': random(255),
+					'g': random(255),
+					'b': random(255)
+				};
+				allBalls.push(newBall);
 			}
 
 		</script>

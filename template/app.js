@@ -36,3 +36,24 @@ var socketServer = new WebSocketServer({'server':server}); //create an instance 
 ////////////////////////////
 ////////////////////////////
 ////////////////////////////
+
+var allSockets = [];
+
+socketServer.on('connection', function(socket) {
+  allSockets.push(socket);
+
+  socket.on('message', function (msg) {
+    console.log(msg);
+    socket.send(msg);
+  });
+
+  //when the connection closes, erase it from memory
+  socket.on('close', function () {
+    for (var i=o; i<allSockets.length; i++){
+      if(allSockets[i] === socket){
+        allSockets.splice(i, 1);
+        break;
+      }
+    }
+  });
+});
